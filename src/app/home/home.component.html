@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="app-container">
+  <!-- 左側導覽列 -->
+  <aside class="sidebar" [class.collapsed]="isCollapsed">
+    <button mat-icon-button matTooltip="開啟側邊欄" (click)="toggleSidebar()">
+      <mat-icon>{{ isCollapsed ? 'menu' : 'chevron_left' }}</mat-icon>
+    </button>
+
+    <ng-container *ngIf="!isCollapsed">
+      <app-pet-info [pet]="pet"></app-pet-info>
+
+      <div class="sidebar-actions">
+        <button mat-icon-button matTooltip="搜尋紀錄" (click)="toggleHistory()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="新聊天" (click)="startNewChat()">
+          <mat-icon>note_add</mat-icon>
+        </button>
+      </div>
+      <div class="history-wrapper" *ngIf="showHistory">
+        <app-history-record [history]="history"></app-history-record>
+      </div>
+    </ng-container>
+
+    <div class="icon-actions" *ngIf="isCollapsed">
+      <button mat-icon-button matTooltip="搜尋紀錄" (click)="toggleHistoryWhenCollapsed()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="新聊天" (click)="startNewChat()">
+        <mat-icon>note_add</mat-icon>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 主畫面 -->
+  <main class="main-content">
+    <app-user-input #userInput></app-user-input>
+  </main>
+</div>
+
+<app-ai-role></app-ai-role>
+<app-footer></app-footer>

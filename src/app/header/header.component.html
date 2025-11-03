@@ -1,0 +1,5 @@
+<header>
+  <img src="../../assets/logo1.jpg" alt="app logo" class="header-logo">
+  <button mat-button *ngIf="!isLogin" (click)="openLogin()">Login</button>
+  <p *ngIf="isLogin" class="header-welcom">哈囉 {{ petName }} 的飼主！</p>
+</header>

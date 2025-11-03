@@ -1,0 +1,25 @@
+<div class="sidebar-section history">
+  <h3>📄歷史問診紀錄</h3>
+
+  <ul *ngIf="history.length > 0; else noHistory">
+    <li *ngFor="let record of history" [class.active]="record.id === activeRecordId">
+      <div class="record-header">
+        <p class="record-title">{{ record.title }}</p>
+        <div class="record-disease" *ngIf="record.diseaseName">
+          疾病: {{ record.diseaseName }}
+        </div>
+        <div class="record-severity {{ record.severity.toLowerCase() }}">
+          嚴重程度: {{ record.severity }}
+        </div>
+      </div>
+      <div class="record-summary">
+        <span class="record-advice">建議: {{ record.finalAdvice }}</span>
+        <span class="record-time">{{ record.createdAt | date:'shortTime' }}</span>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #noHistory>
+    <p class="empty">正在載入歷史紀錄，請稍候...</p>
+  </ng-template>
+</div>

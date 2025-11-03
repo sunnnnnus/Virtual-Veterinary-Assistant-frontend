@@ -1,0 +1,53 @@
+/* login.component.css 和 register.component.css */
+
+.register-container, form {
+    max-width: 400px;
+    margin: 0px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 25px;
+}
+
+p {
+    color: #343a40;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button[mat-raised-button] {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+a {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+    font-weight: bold;
+}

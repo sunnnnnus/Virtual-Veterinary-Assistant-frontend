@@ -1,0 +1,17 @@
+.regiser-link{
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+    font-weight: bold;
+}
+.cancelBtn{
+  margin-left: 10px;
+  background-color: gray;
+  color: white;
+}

@@ -1,0 +1,81 @@
+:host {
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto; /* 歷史紀錄過多時可滾動 */
+}
+
+.sidebar-section.history {
+    padding: 15px;
+    background-color: #ffffff; /* 白色背景 */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 標題樣式 */
+h3 {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0 0 15px 0;
+}
+
+/* 清單容器 */
+ul {
+    list-style: none; /* 移除預設清單點 */
+    padding: 0;
+    margin: 0;
+}
+
+/* 清單項目 */
+li {
+    padding: 10px 12px;
+    margin-bottom: 6px;
+
+    background-color: transparent; /* 預設透明 */
+    border-radius: 8px;
+    transition: background-color 0.2s ease, border-left 0.2s ease;
+
+    font-size: 0.9rem;
+    color: #343a40;
+
+    /* 讓單行文字超出時顯示省略號 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 懸停效果：淺灰色背景，提供點擊回饋 */
+li:hover {
+    background-color: #f1f1f1;
+}
+
+/* 選中項目 (假設你的 Angular 程式碼會加上 .active 類別) */
+li.active {
+    background-color: #e9ecef; /* 較深的淺灰色，表示選中 */
+    border-left: 4px solid #007bff; /* 左側品牌藍色條 */
+    padding-left: 8px; /* 調整 padding 配合左側藍條 */
+    font-weight: 600; /* 選中時加粗 */
+}
+
+.record-title,
+.record-advice {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.record-disease {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 4px 0;
+  word-break: break-word;
+}
+
+.empty{
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+    padding: 5px;
+}

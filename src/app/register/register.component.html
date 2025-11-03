@@ -1,0 +1,64 @@
+<div class="register-container">
+  <h2>註冊帳號</h2>
+  <p>*為必填，其他欄位選填</p>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- 帳號/手機 -->
+    <mat-form-field appearance="fill">
+      <mat-label>手機號碼</mat-label>
+      <input matInput formControlName="phone" name="userphone" required>
+    </mat-form-field>
+
+    <!-- 密碼 -->
+    <mat-form-field appearance="fill">
+      <mat-label>密碼</mat-label>
+      <input matInput type="password" formControlName="password" name="password" required>
+    </mat-form-field>
+
+    <!-- 確認密碼 -->
+    <mat-form-field appearance="fill">
+      <mat-label>確認密碼</mat-label>
+      <input matInput type="password"
+             [(ngModel)]="confirmPassword"
+             name="confirmPassword" required
+             [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+
+    <!-- 寵物資訊 -->
+    <mat-form-field appearance="fill">
+      <mat-label>寵物名字</mat-label>
+      <input matInput formControlName="pName" name="petName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>寵物性別</mat-label>
+      <input matInput formControlName="sex"
+             name="petSex" required
+             placeholder="公 | 母 | 未知">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>寵物品種</mat-label>
+      <input matInput formControlName="species" name="petSpecies" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>寵物年齡</mat-label>
+      <input matInput type="number" formControlName="age" name="petAge">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>寵物體重<span>(建議填寫)</span></mat-label>
+      <input matInput formControlName="weight" name="petWeight">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">註冊</button>
+  </form>
+
+  <p>
+    已有帳號？
+    <a (click)="openLogin()">點此登入</a>
+    <span>
+      <a href="/">返回首頁</a>
+    </span>
+  </p>
+</div>

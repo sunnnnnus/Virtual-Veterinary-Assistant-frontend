@@ -1,0 +1,20 @@
+<h2>登入</h2>
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>手機號碼</mat-label>
+    <input matInput [(ngModel)]="userphone" name="userphone">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>密碼</mat-label>
+    <input matInput type="password" [(ngModel)]="password" name="password">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="login()">登入</button>
+  <button mat-raised-button class="cancelBtn" (click)="cancel()">取消</button>
+</form>
+<br>
+<p>
+  沒有帳號?
+  <a class="regiser-link" (click)="goToRegister()">立即註冊</a>
+</p>

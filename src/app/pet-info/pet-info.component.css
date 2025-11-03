@@ -1,0 +1,70 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.pet-info-card {
+    padding: 15px;
+    margin-bottom: 20px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 8px;
+}
+
+/* 新增：包裹文字資訊和頭像的 Flex 容器 */
+.card-content-wrapper {
+    display: flex;
+    justify-content: space-between; /* 文字靠左，頭像靠右 */
+    align-items: center; /* 垂直置中 */
+    margin-top: 10px; /* 與標題區隔 */
+}
+
+/* 寵物文字資訊容器 */
+.pet-details {
+    display: flex;
+    flex-direction: column;
+    /* 讓文字資訊佔據可用空間 */
+    flex-grow: 1;
+    margin-right: 15px; /* 與頭像的間隔 */
+}
+
+p {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+    padding: 5px;
+}
+
+p b {
+    color: #343a40;
+    font-weight: 600;
+}
+
+/* 寵物頭像樣式 */
+.pet-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 3px solid #007bff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* ⚠️ 新增：限制容器內圖片的大小 */
+.pet-avatar img {
+    width: 100%; /* 讓圖片寬度充滿父容器 (70px) */
+    height: 80%; /* 讓圖片高度充滿父容器 (70px) */
+    object-fit: cover; /* 確保圖片不被拉伸，並填滿整個區域 (類似 background-size: cover) */
+}

@@ -12,6 +12,11 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
+
+    // 解決 JSON 匯入錯誤
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+
     "lib": [
       "es2018",
       "dom"

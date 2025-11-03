@@ -1,0 +1,93 @@
+<body>
+  <div class="page-container">
+    <div class="user-input-container" [ngClass]="{ 'center-on-empty': userMessage.length === 0 }">
+      <!-- 聊天區 -->
+      <div class="chat-window" #chatWindow>
+        <div *ngFor="let msg of chatMessage" [ngClass]="msg.sender" class="chat-bubble">
+          <p class="message-content">{{ msg.text }}</p>
+          <div class="ai-response">
+            {{ responseText }}
+             <button *ngIf="msg.sender === 'ai'" class="play-button" (click)="onPlay(msg.text)">🔊</button>
+          </div>
+          <span class="message-time">{{ msg.timestamp | date:'shortTime' }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-container">
+        <!-- 三個點動畫 -->
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="loading-text">分析症狀中</div>
+      </div>
+
+      <!-- 初始提示文字 -->
+      <div class="welcome-text">您好，請問有什麼可以幫助您的呢?</div>
+
+      <!-- 輸入區 -->
+      <div class="input-area-wrapper centered">
+        <textarea
+          class="input-box"
+          placeholder="請盡量完整描述寵物症狀"
+          [(ngModel)]="userMessage"
+          (keydown.enter)="sendMessage()"
+          rows="1">
+        </textarea>
+
+        <div class="input-suffix">
+          <button
+            *ngIf="supportsSpeechRecognition"
+            class="icon-button mic-button"
+            [class.listening]="isListening"
+            (click)="toggleSpeechInput()">
+            <span *ngIf="!isListening">🎙️</span>
+            <span *ngIf="isListening">🔴</span>
+          </button>
+
+          <button
+            class="icon-button send-button"
+            [disabled]="userMessage.length === 0"
+            (click)="sendMessage()">
+            ➤
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- 結束問診彈窗 -->
+  <div *ngIf="showFinalizeModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>🔚 結束問診</h2>
+      <p>您已完成本次問診，是否要結束並開始新的問診？</p>
+      <app-care-suggestion-card
+        [suggestions]="careSuggestions"
+        [voiceName]="currentRole.voiceName"
+        (playRequested)="onPlay(careSuggestions.join('。'))">
+      </app-care-suggestion-card>
+      <div class="modal-actions">
+        <button (click)="cancelFinalize()">取消</button>
+        <button (click)="confirmFinalize()">結束問診</button>
+      </div>
+    </div>
+  </div>
+  <!-- 緊急提醒彈窗 -->
+  <div *ngIf="showEmergencyModal" class="modal-overlay">
+    <div class="modal-content emergency">
+      <h2>⚠️ 緊急提醒</h2>
+      <p class="modal-message">
+        系統判斷此症狀可能需要立即就醫，建議您儘速前往附近獸醫院。
+      </p>
+      <p class="modal-subtext">
+        您可以點擊下方按鈕開啟 Google 地圖搜尋附近的獸醫院。
+      </p>
+      <p class="modal-subtext">
+        若未自動定位，請確認瀏覽器已開啟位置權限。
+      </p>
+      <div class="modal-actions">
+        <button (click)="cancelEmergency()">我知道了</button>
+        <button (click)="openGoogleMap()">前往 Google 地圖</button>
+      </div>
+    </div>
+  </div>
+</body>

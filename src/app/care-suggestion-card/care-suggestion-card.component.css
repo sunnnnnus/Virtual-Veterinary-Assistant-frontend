@@ -1,0 +1,56 @@
+.care-card {
+  background-color: #f9f9fc;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  margin-top: 16px;
+}
+
+.care-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #4a6fa5;
+  font-weight: 600;
+}
+
+.care-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 16px;
+}
+
+.care-card li {
+  margin-bottom: 10px;
+  padding-left: 1.2em;
+  position: relative;
+  line-height: 1.6;
+}
+
+.care-card li::before {
+  content: '🩺';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.care-card .comfort {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.care-card .play-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: transform 0.2s ease;
+}
+
+.care-card .play-button:hover {
+  transform: scale(1.1);
+}

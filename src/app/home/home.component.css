@@ -1,0 +1,145 @@
+/* ======================== */
+/* 主容器 (Home Component) */
+/* ======================== */
+:host {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* header / content / footer */
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Header / Footer 固定在上、下 */
+app-header {
+    grid-row: 1;
+}
+app-footer {
+    grid-row: 3;
+}
+
+/* ======================== */
+/* 中間主要內容區域 */
+/* ======================== */
+.app-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 側邊欄 */
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #e9ecef;
+    padding: 15px 0;
+    flex-shrink: 0;
+    transition: width 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 250px;
+    height: 100%;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+    padding: 15px 0;
+}
+
+/* 主內容（中間白色部分） */
+.main-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 0 20px 0;
+    background-color: #ffffff;
+}
+
+/* ======================== */
+/* user-input 容器調整 */
+/* ======================== */
+app-user-input {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%
+}
+
+/* user-input 的內層容器 */
+app-user-input .user-input-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    justify-content: center; /* 預設垂直置中 */
+    align-items: center;
+    min-height: 0;
+}
+
+app-user-input .user-input-container.center-on-empty {
+    justify-content: center; /* 無訊息時置中 */
+}
+
+app-user-input .user-input-container:not(.center-on-empty) {
+    justify-content: flex-start;
+}
+
+/* 聊天區滾動設定 */
+app-user-input .chat-window {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+/* ======================== */
+/* 側邊欄內部 (不變) */
+/* ======================== */
+.sidebar > button {
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #6c757d;
+}
+.sidebar .icon-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+.sidebar .icon-actions button {
+    margin-bottom: 15px;
+    color: #6c757d;
+}
+.sidebar .icon-actions button:hover {
+    color: #007bff;
+}
+.sidebar-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 15px;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    margin: 15px 0;
+}
+.sidebar-actions button {
+    color: #007bff;
+}
+.sidebar-actions button mat-icon {
+    font-size: 24px;
+}

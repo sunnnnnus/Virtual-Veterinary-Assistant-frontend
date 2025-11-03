@@ -1,0 +1,18 @@
+<div class="ai-role-container">
+  <!-- 目前選中的角色 -->
+  <div class="ai-avatar-wrapper" (click)="toggleOtherRole()">
+    <img [src]="currentRole.avatar" alt="{{ currentRole.name }}" class="ai-avatar">
+    <span class="ai-name">{{ currentRole.name }}</span>
+  </div>
+
+  <!-- 其他角色（點擊後切換） -->
+  <ng-container *ngIf="showOtherRole">
+    <div class="ai-avatar-wrapper other-role"
+        *ngFor="let role of otherRoles"
+        (click)="selectRole(role)">
+      <img [src]="role.avatar" alt="{{ role.name }}" class="ai-avatar">
+      <span class="ai-name">{{ role.name }}</span>
+    </div>
+  </ng-container>
+</div>
+

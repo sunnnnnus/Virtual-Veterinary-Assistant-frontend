@@ -1,0 +1,24 @@
+<div *ngIf="pet" class="pet-info-card">
+
+    <h3>📄寵物資訊</h3>
+
+    <div class="card-content-wrapper">
+
+        <div class="pet-details">
+            <p><b>名稱:</b> {{ pet.pName }}</p>
+            <p><b>品種:</b> {{ pet.species }}</p>
+            <p><b>年齡:</b> {{ pet.age }} 歲</p>
+            <p><b>性別:</b> {{ pet.sex }}</p>
+            <p><b>體重:</b> {{ pet.weight }} 公斤</p>
+        </div>
+
+        <div class="pet-avatar">
+            <img [src]="getPetAvatar(pet.species)" alt="{{ pet.pName }} Avatar">
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!pet" class="pet-info-card">
+    <h3>📄寵物資訊</h3>
+    <p>正在載入寵物資料，請稍候...</p>
+</div>
