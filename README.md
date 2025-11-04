@@ -1,6 +1,6 @@
 # 🐾 Virtual Veterinary Assistant
 
-An AI-powered veterinary assistant designed for pet owners. Through symptom input and behavioral observation, it compares against a rich database of animal conditions to provide preliminary health advice, urgency assessment, and personalized care suggestions. Features include role-based tone, voice playback, and interactive care cards to enhance user trust and awareness.
+一款專為寵物主人設計的AI獸醫助理。透過輸入症狀和觀察行為，它會將資訊與豐富的動物疾病資料庫進行比對，從而提供初步健康建議、緊急程度評估和個人化護理方案。其功能包括基於角色的語調、語音播放和互動式護理卡片，旨在增強使用者的信任度和認知度。
 
 ---
 
@@ -65,4 +65,3 @@ An AI-powered veterinary assistant designed for pet owners. Through symptom inpu
 ---
 
 > 📬 本專案為大學畢業專題用。
->>>>>>> origin/main
