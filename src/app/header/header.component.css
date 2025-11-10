@@ -29,7 +29,7 @@ header {
 
 
 /* 3. Login 按鈕樣式 */
-header button {
+.login-button {
     background-color: #007bff; /* 半透明白色背景 */
     color: white;
     border: 1px solid white;
@@ -40,11 +40,11 @@ header button {
     transition: background-color 0.3s;
     text-transform: uppercase;
     min-width: 60px;
-    margin-right: 50px;
+    margin-right: 10px;
     flex-shrink: 0; /* 防止按鈕被壓縮 */
 }
 
-header button:hover {
+.login-button:hover {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -59,4 +59,70 @@ header button:hover {
   color: #333;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  padding: 6px;
+  margin-left: 10px;
+  font-size: 1.8rem;
+  color: #343a40;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.menu-button mat-icon {
+  font-size: 28px;
+}
+
+
+@media (max-width: 768px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+    height: auto;
+  }
+
+  .logo-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .header-logo {
+    height: 60px;
+    width: auto;
+  }
+
+  .header-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .menu-button {
+    font-size: 1.8rem;
+    color: #343a40;
+  }
+
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .header-welcom {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
 }

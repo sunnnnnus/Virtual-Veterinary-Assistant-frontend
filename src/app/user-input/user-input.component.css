@@ -321,3 +321,346 @@ html, body {
   margin-left: 8px;
   cursor: pointer;
 }
+
+/* 確保整頁高度被正確限制 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 外層容器固定滿版 */
+.page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* 主要內容容器 */
+.user-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+/* ====================== 聊天區 ====================== */
+.chat-window {
+  flex: 1; /* 撐滿中間空間 */
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  overflow-y: auto; /* ✅ 滾軸在這裡 */
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 0; /* ✅ 讓 flex 正常收縮以顯示滾軸 */
+  scroll-behavior: smooth;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+/* 聊天氣泡 */
+.chat-bubble {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 70%;
+  word-break: break-word;
+}
+
+.chat-bubble.user {
+  background-color: #007bff;
+  align-self: flex-end;
+}
+
+.chat-bubble.ai {
+  background-color: #e9ecef;
+  align-self: flex-start;
+}
+
+.chat-bubble p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chat-bubble.user p { color: #fff; }
+.chat-bubble.ai p { color: #343a40; }
+
+.message-time {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* ====================== 輸入區 ====================== */
+
+/* 共用外觀：輸入框外圍 */
+.input-area-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+}
+
+/* 初始置中狀態 */
+.input-area-wrapper.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 0;
+  width: 100%;
+  max-width: 600px;
+  z-index: 2;
+}
+
+/* 有訊息時才釘底部 */
+.input-area-wrapper.sticky {
+  position: sticky;
+  bottom: 0;
+  width: calc(100% - 120px);
+  max-width: 600px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: width 0.3s ease;
+}
+
+
+/* 提示文字 */
+.welcome-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 輸入框 */
+.input-box {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  border-radius: 50px;
+  border: none;
+  background-color: #ffffff;
+  resize: none;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+
+/* 按鈕 */
+.input-suffix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  color: #97c8ed;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  color: #7ab0db;
+  background-color: rgba(0,0,0,0.03);
+}
+
+.mic-button.listening span {
+  color: #ff4d4d !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* RWD */
+@media (max-width: 600px) {
+  .input-area-wrapper {
+    padding: 8px;
+    border-radius: 40px;
+  }
+  .input-box {
+    font-size: 0.9rem;
+  }
+  .icon-button {
+    font-size: 1.2rem;
+    padding: 4px;
+  }
+
+  .input-area-wrapper.centered {
+    max-width: 90%;
+    padding: 8px;
+  }
+
+  .input-area-wrapper.sticky {
+    width: calc(100% - 40px);
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .welcome-text {
+    font-size: 1rem;
+    top: 30%;
+  }
+
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.loading-text {
+  font-size: 12px;
+  color: #555;
+  font-weight: 500;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background-color: #333;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modal-actions button:first-child {
+  background-color: #ccc;
+}
+
+.modal-actions button:last-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-content.emergency {
+  border-left: 6px solid #e53935;
+}
+
+.modal-message {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.modal-subtext {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.play-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 8px;
+  cursor: pointer;
+}
+

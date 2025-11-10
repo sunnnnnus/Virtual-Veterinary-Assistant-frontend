@@ -74,4 +74,23 @@
     color: #343a40;
 }
 
+@media (max-width: 768px) {
+  :host {
+    bottom: 120px;
+    right: 20px;
+  }
 
+  .ai-avatar-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ai-name {
+    bottom: -18px;
+    font-size: 11px;
+  }
+
+  .ai-role-container {
+    gap: 10px;
+  }
+}

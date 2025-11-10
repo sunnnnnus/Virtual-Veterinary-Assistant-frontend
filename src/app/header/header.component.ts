@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { AuthApiService } from '../services/api/auth-api.service';
@@ -10,6 +10,7 @@ import { PetApiService } from '../services/api/pet-api.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Output() menuClicked = new EventEmitter<void>();
   isLogin = false;
   petName = '';
 
@@ -42,5 +43,7 @@ export class HeaderComponent implements OnInit {
       width: '300px'
     });
   }
-
+  emitMenuClick() {
+    this.menuClicked.emit();
+  }
 }

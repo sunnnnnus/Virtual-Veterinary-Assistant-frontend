@@ -1,7 +1,7 @@
-<app-header></app-header>
+<app-header (menuClicked)="toggleSidebar()"></app-header>
 <div class="app-container">
   <!-- 左側導覽列 -->
-  <aside class="sidebar" [class.collapsed]="isCollapsed">
+  <aside class="sidebar" [class.collapsed]="isCollapsed" [class.open]="isSidebarOpen">
     <button mat-icon-button matTooltip="開啟側邊欄" (click)="toggleSidebar()">
       <mat-icon>{{ isCollapsed ? 'menu' : 'chevron_left' }}</mat-icon>
     </button>
