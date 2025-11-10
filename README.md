@@ -2,7 +2,12 @@
 
 一款專為寵物主人設計的AI獸醫助理。透過輸入症狀和觀察行為，它會將資訊與豐富的動物疾病資料庫進行比對，從而提供初步健康建議、緊急程度評估和個人化護理方案。其功能包括基於角色的語調、語音播放和互動式護理卡片，旨在增強使用者的信任度和認知度。
 
-[🖱️點擊體驗](https://virtual-veterinary-assistant-frontend.onrender.com/)
+---
+
+## 🌐 線上 Demo
+[👉 點我立即體驗 VVA](https://virtual-veterinary-assistant-frontend.onrender.com/)
+
+（建議用桌機或手機瀏覽器開啟）
 
 ---
 
