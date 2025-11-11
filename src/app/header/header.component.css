@@ -1,73 +1,80 @@
-/* app-header.component.css */
-
 :host {
-    display: block; /* 確保 header 標籤佔滿一行 */
+  display: block;
 }
 
+/* 整體 header 排版 */
 header {
-    display: flex ;
-    align-items: center;
-    justify-content: space-between;
-
-    height: 100px;
-    width: 100%;
-
-    background-color: #ffffff;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 增加輕微陰影 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-/* 1. Logo 圖片樣式 (靠左) */
+/* logo + login/welcome 同一排 */
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+/* logo 靠左 */
 .header-logo {
-    /* 設置 Logo 尺寸 */
-    height: 100px; /* 根據 Header 高度調整 */
-    width: auto;
-
-    /* Logo 與 <h1> 之間的分隔空間 */
-    flex-shrink: 0; /* 防止 Logo 被壓縮 */
+  height: 100px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
 }
 
-
-/* 3. Login 按鈕樣式 */
+/* login 按鈕靠右 */
 .login-button {
-    background-color: #007bff; /* 半透明白色背景 */
-    color: white;
-    border: 1px solid white;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    text-transform: uppercase;
-    min-width: 60px;
-    margin-right: 10px;
-    flex-shrink: 0; /* 防止按鈕被壓縮 */
+  background-color: #007bff;
+  color: white;
+  border: 1px solid white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  min-width: 60px;
+  white-space: nowrap;
+  max-width: 120px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .login-button:hover {
-    background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-.header-welcom{
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+/* 歡迎文字也靠右 */
+.header-welcom {
+  font-size: 0.9rem;
   font-weight: 500;
   color: #333;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  white-space: nowrap;
+  max-width: 120px;
+  margin-left: auto;
+  text-align: right;
 }
 
+/* menu-button 獨立控制 */
 .menu-button {
+  display: none;
   background: none;
   border: none;
   padding: 6px;
-  margin-left: 10px;
+  margin-right: 10px;
   font-size: 1.8rem;
-  color: #343a40;
+  color: #555b61;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -77,52 +84,37 @@ header {
   font-size: 28px;
 }
 
-
+/* 手機版排版 */
 @media (max-width: 768px) {
   header {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px 15px;
+    align-items: stretch;
     height: auto;
+    padding: 10px 15px;
   }
 
-  .logo-wrapper {
+  .header-main-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   .header-logo {
     height: 60px;
-    width: auto;
+    transform: none;
   }
 
-  .header-actions-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 10px;
+  .login-button,
+  .header-welcom {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    max-width: 120px;
   }
 
   .menu-button {
-    font-size: 1.8rem;
-    color: #343a40;
-  }
-
-  .login-button {
-    background-color: #007bff;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  .header-welcom {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #333;
+    display: flex;
+    align-self: flex-start;
   }
 }

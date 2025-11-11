@@ -64,6 +64,10 @@ html, body {
 }
 
 .chat-bubble.ai {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  flex-wrap: wrap;
   background-color: #e9ecef;
   align-self: flex-start;
 }
@@ -528,24 +532,12 @@ html, body {
     font-size: 1.2rem;
     padding: 4px;
   }
-
-  .input-area-wrapper.centered {
-    max-width: 90%;
-    padding: 8px;
+  .input-area-wrapper.centered{
+    max-width: 350px;
   }
-
   .input-area-wrapper.sticky {
-    width: calc(100% - 40px);
-    max-width: 100%;
-    margin-left: 20px;
-    margin-right: 20px;
+    max-width: 350px;
   }
-
-  .welcome-text {
-    font-size: 1rem;
-    top: 30%;
-  }
-
 }
 
 .loading-container {
@@ -660,7 +652,9 @@ html, body {
   background: none;
   border: none;
   font-size: 1.2rem;
-  margin-left: 8px;
+  margin-left: 0;
+  padding: 4px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 

@@ -7,7 +7,7 @@
           <p class="message-content">{{ msg.text }}</p>
           <div class="ai-response">
             {{ responseText }}
-             <button *ngIf="msg.sender === 'ai'" class="play-button" (click)="onPlay(msg.text)">🔊</button>
+              <button *ngIf="msg.sender === 'ai'" class="play-button" (click)="onPlay(msg.text)">🔊</button>
           </div>
           <span class="message-time">{{ msg.timestamp | date:'shortTime' }}</span>
         </div>

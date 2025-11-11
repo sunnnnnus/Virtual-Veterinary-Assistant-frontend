@@ -1,12 +1,16 @@
 <header>
-  <div class="logo-wrapper">
+  <div class="header-top-row">
     <img src="../../assets/logo1.jpg" alt="app logo" class="header-logo">
+
+    <ng-container *ngIf="!isLogin">
+      <button mat-button class="login-button" (click)="openLogin()">Login</button>
+    </ng-container>
+
+    <ng-container *ngIf="isLogin">
+      <p class="header-welcom">哈囉 {{ petName }} 的飼主！</p>
+    </ng-container>
   </div>
-    <div class="header-actions-row">
-    <button class="menu-button" mat-icon-button (click)="emitMenuClick()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <button mat-button class="login-button" *ngIf="!isLogin" (click)="openLogin()">Login</button>
-    <p *ngIf="isLogin" class="header-welcom">哈囉 {{ petName }} 的飼主！</p>
-  </div>
+  <button class="menu-button" mat-icon-button *ngIf="isMobile" (click)="emitMenuClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
 </header>

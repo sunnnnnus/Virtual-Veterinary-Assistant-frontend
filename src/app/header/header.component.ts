@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   @Output() menuClicked = new EventEmitter<void>();
   isLogin = false;
   petName = '';
+  isMobile = false;
 
   constructor(
     private dialog: MatDialog,
@@ -22,6 +23,8 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.checkMobile();
+    window.addEventListener('resize', () => this.checkMobile());
     this.authApi.currentUserId$.subscribe(userId => {
       this.isLogin = !!userId;
 
@@ -46,4 +49,8 @@ export class HeaderComponent implements OnInit {
   emitMenuClick() {
     this.menuClicked.emit();
   }
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 768;
+  }
 }
+
