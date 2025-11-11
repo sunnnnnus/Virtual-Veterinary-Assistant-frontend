@@ -5,9 +5,17 @@
       <div class="chat-window" #chatWindow>
         <div *ngFor="let msg of chatMessage" [ngClass]="msg.sender" class="chat-bubble">
           <p class="message-content">{{ msg.text }}</p>
-          <div class="ai-response">
+          <div class="ai-response" *ngIf="msg.sender === 'ai'">
             {{ responseText }}
-              <button *ngIf="msg.sender === 'ai'" class="play-button" (click)="onPlay(msg.text)">🔊</button>
+              <button
+                *ngIf="currentPlayingMessageId !== msg.id"
+                (click)="onPlay(msg)"
+              >🔊</button>
+
+              <button
+                *ngIf="currentPlayingMessageId === msg.id"
+                (click)="onPlay(msg)"
+              >⏸️</button>
           </div>
           <span class="message-time">{{ msg.timestamp | date:'shortTime' }}</span>
         </div>
@@ -60,10 +68,13 @@
     <div class="modal-content">
       <h2>🔚 結束問診</h2>
       <p>您已完成本次問診，是否要結束並開始新的問診？</p>
+      <h3 class="card-title">照護建議</h3>
       <app-care-suggestion-card
-        [suggestions]="careSuggestions"
+        *ngFor="let suggestion of careSuggestions; let i = index"
+        [suggestions]="[suggestion]"
         [voiceName]="currentRole.voiceName"
-        (playRequested)="onPlay(careSuggestions.join('。'))">
+        [isPlaying]="playingCardIndex === i"
+        (playRequested)="onPlayCard(i, suggestion, currentRole.voiceName)">
       </app-care-suggestion-card>
       <div class="modal-actions">
         <button (click)="cancelFinalize()">取消</button>

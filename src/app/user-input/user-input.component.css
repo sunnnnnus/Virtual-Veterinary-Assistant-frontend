@@ -658,3 +658,9 @@ html, body {
   flex-shrink: 0;
 }
 
+.card-title {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #4a6fa5;
+  font-weight: 600;
+}

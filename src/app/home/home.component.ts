@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
-    this.isSidebarOpen = !this.isSidebarOpen;
+     this.isSidebarOpen = !this.isSidebarOpen;
     if (this.isCollapsed) {
       this.showHistory = false;
     }

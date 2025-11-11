@@ -1,7 +1,8 @@
 <div class="care-card">
-  <h3>照護建議</h3>
-  <button class="play-button" (click)="requestPlay()">🔊</button>
   <ul>
     <li *ngFor="let s of suggestions">{{ s }}</li>
   </ul>
+  <button (click)="requestPlay()">
+    {{ isPlaying ? '⏸️' : '🔊' }}
+  </button>
 </div>

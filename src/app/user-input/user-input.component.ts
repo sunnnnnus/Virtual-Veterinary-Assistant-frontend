@@ -57,6 +57,9 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   currentRole: Role | null = null;
   careSuggestions: string[] = [];
   isPlaying = false; // 控制播放狀態
+  currentPlayingMessageId: string | null = null;
+  playingCardIndex: number | null = null;
+
 
   // 歷史紀錄管理
   history: Array<{
@@ -91,15 +94,7 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (!this.supportsSpeechRecognition) {
-      console.warn('❌ 瀏覽器不支援 Web Speech API。');
-    if (!('speechSynthesis' in window)) {
-      console.warn('語音合成 API 不支援此瀏覽器');
-    } else {
-      console.log('✅ 語音合成 API 可用');
-    }
-
-    }
+    console.log('照護建議:', this.careSuggestions);
 
     // 初始狀態
     this.currentPet = null;
@@ -222,6 +217,9 @@ private saveCurrentConversation() {
     });
   }
 
+  generateUniqueId(): string {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
+  }
 
 /** 統一處理文字輸入與發送*/
 sendMessage() {
@@ -242,6 +240,7 @@ sendMessage() {
 
   // 將使用者訊息加入歷史聊天
   this.chatMessage.push({
+    id: this.generateUniqueId(),
     sender: 'user',
     text: userMsgText,
     timestamp: new Date(),
@@ -279,6 +278,7 @@ sendMessage() {
 
       // 推入 AI 訊息
       this.chatMessage.push({
+        id: this.generateUniqueId(),
         sender: 'ai',
         text: response.responseText,
         timestamp: new Date(),
@@ -312,6 +312,7 @@ sendMessage() {
       console.error('AI 助理回覆失敗:', err);
 
       this.chatMessage.push({
+        id: this.generateUniqueId(),
         sender: 'ai',
         text: '目前系統暫時無法取得 AI 回覆，請稍後再試或重新輸入訊息。',
         timestamp: new Date(),
@@ -499,14 +500,29 @@ ngOnDestroy(): void {
   }
 
   // ============== 語音輸出 ==============
-  onPlay(text: string) {
-    if (this.isPlaying) return; // 防止重複播放
-    this.isPlaying = true;
-
+  onPlay(msg: ChatMessage) {
     const role = this.roleState.getCurrentRole();
-    this.ttsApi.play(text, role).finally(() => {
-      this.isPlaying = false; // 播放結束後解除鎖定
-    });
+    if (this.isPlaying) {
+      this.ttsApi.pause();
+      this.isPlaying = false;
+    } else {
+      this.isPlaying = true;
+      this.ttsApi.play(msg.text, role).finally(() => {
+        this.isPlaying = false;
+      });
+    }
+  }
+
+  onPlayCard(index: number, text: string, role: Role): void {
+    if (this.playingCardIndex === index) {
+      this.ttsApi.pause();
+      this.playingCardIndex = null;
+    } else {
+      this.playingCardIndex = index;
+      this.ttsApi.play(text, role).finally(() => {
+        this.playingCardIndex = null;
+      });
+    }
   }
 
 }
