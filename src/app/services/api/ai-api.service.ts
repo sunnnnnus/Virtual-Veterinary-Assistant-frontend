@@ -12,6 +12,7 @@ export interface ChatMessage {
   showMapButton: boolean;
   diseaseName?: string;
   severity?: string;
+  id: string;
 }
 
 // 定義發送到後端的請求介面

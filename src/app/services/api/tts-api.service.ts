@@ -6,12 +6,12 @@ import { AIRole } from 'src/app/ai-role/ai-role.component';
 @Injectable({ providedIn: 'root' })
 export class TtsApiService {
   private apiUrl = `${environment.apiBaseUrl}/api/tts`;
-  constructor(
-    private http: HttpClient
-  ) {}
+  private currentAudio: HTMLAudioElement | null = null;
+
+  constructor(private http: HttpClient) {}
 
   play(text: string, role: AIRole): Promise<void> {
-    const voiceName = role.voiceName || 'cmn-TW-Wavenet-A';
+    const voiceName = role.voiceName || 'zh-TW-HsiaoChenNeural';
 
     return new Promise((resolve, reject) => {
       this.http.post(`${this.apiUrl}`, { text, voiceName }, { responseType: 'arraybuffer' })
@@ -21,14 +21,36 @@ export class TtsApiService {
             const url = URL.createObjectURL(blob);
             const audio = new Audio(url);
 
-            audio.onended = () => resolve();     // 播放結束
-            audio.onerror = () => reject();      // 播放失敗
-            audio.play().catch(reject);          // 播放失敗（例如瀏覽器限制）
+            this.currentAudio = audio;
+
+            audio.onended = () => resolve();
+            audio.onerror = () => reject();
+            audio.play().catch(reject);
           },
-          error: err => reject(err)              // API 請求失敗
+          error: err => reject(err)
         });
 
       console.log('前端送出的語音:', voiceName);
     });
+  }
+
+  pause(): void {
+    if (this.currentAudio && !this.currentAudio.paused) {
+      this.currentAudio.pause();
+    }
+  }
+
+  resume(): void {
+    if (this.currentAudio && this.currentAudio.paused) {
+      this.currentAudio.play();
+    }
+  }
+
+  stop(): void {
+    if (this.currentAudio) {
+      this.currentAudio.pause();
+      this.currentAudio.currentTime = 0;
+      this.currentAudio = null;
+    }
   }
 }
