@@ -2,7 +2,6 @@ import { AuthApiService } from './../services/api/auth-api.service';
 import { UserInputComponent } from './../user-input/user-input.component';
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { OpeningContext, PetApiService } from '../services/api/pet-api.service';
-import { filter } from 'rxjs/operators';
 import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 
