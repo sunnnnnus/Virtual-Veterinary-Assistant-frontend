@@ -7,7 +7,7 @@
     </ng-container>
 
     <ng-container *ngIf="isLogin">
-      <p class="header-welcom">哈囉 {{ petName }} 的飼主！</p>
+      <button mat-button class="logout-button" (click)="logout()">Logout</button>
     </ng-container>
   </div>
   <button class="menu-button" mat-icon-button *ngIf="isMobile" (click)="emitMenuClick()">

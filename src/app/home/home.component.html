@@ -34,10 +34,10 @@
 
   <!-- 主畫面 -->
   <main class="main-content">
-  <div  *ngIf="openingPrompt && !hasTyped" @popInPrompt class="opening-prompt-box">
+  <div  *ngIf="isLogin && openingPrompt && !hasTyped" @popInPrompt class="opening-prompt-box">
     <p class="opening-text">🐾{{ openingPrompt }}</p>
   </div>
-    <app-user-input (hasTyped)="onUserHasTyped()"></app-user-input>
+    <app-user-input #userInput (hasTyped)="onUserHasTyped()"></app-user-input>
   </main>
 </div>
 

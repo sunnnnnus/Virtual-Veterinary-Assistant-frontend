@@ -25,6 +25,7 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
 
 export class HomeComponent implements OnInit {
   @ViewChild('userInput') userInputComponent!: UserInputComponent;
+
   isCollapsed = true;
   showHistory = false;
   history: any[] = [];
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
   openingContext: any;
   openingPrompt: string='';
   hasTyped = false;
+  isLogin = false;
 
   constructor(
     private authApi :AuthApiService,
@@ -39,9 +41,18 @@ export class HomeComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.authApi.currentUserId$.pipe(
-      filter(userId => !!userId) // 等待登入完成
-    ).subscribe(userId => {
+    this.authApi.currentUserId$.subscribe(userId => {
+      this.isLogin = !!userId;
+
+      if (!userId) {
+        // 登出時清空 UI 狀態
+        this.openingPrompt = '';
+        this.openingContext = null;
+        this.hasTyped = false;
+        this.userInputComponent?.resetChat();
+        return; // 登出後直接 return，不要再跑下面的 petId 邏輯
+      }
+
       const petId = this.authApi.getDefaultPetId();
       if (petId) {
         console.log('🐶 預設寵物 ID:', petId);
@@ -56,7 +67,8 @@ export class HomeComponent implements OnInit {
           }
         });
       } else {
-        console.warn(`✅ 用戶 ${userId} 登入成功，但尚未選擇寵物`);
+        this.openingContext = null;
+        this.openingPrompt = '';   // 沒有寵物 → 清掉開場卡片
       }
     });
   }
@@ -104,5 +116,7 @@ export class HomeComponent implements OnInit {
     this.showHistory = true;
   }
 
-
+  logout(): void {
+    this.authApi.logout();
+  }
 }

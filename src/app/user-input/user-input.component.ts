@@ -62,6 +62,8 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   isPlaying = false; // 控制播放狀態
   currentPlayingMessageId: string | null = null;
   playingCardIndex: number | null = null;
+  petName : string ='';
+
 
   // 歷史紀錄管理
   history: Array<{
@@ -147,15 +149,18 @@ private loadPetDetail(petId: number): void {
       next: petDetail => {
         if (petDetail && petDetail.pId > 0) {
           this.currentPet = petDetail;
+          this.petName = petDetail.pName;
           this.petApi.setCurrentPetId(petDetail.pId);
         } else {
           this.currentPet = null;
+          this.petName = '';
         }
         this.isContextReady = true;
       },
       error: err => {
         console.error('致命錯誤：Load Pet Detail 訂閱失敗', err);
         this.currentPet = null;
+        this.petName = '';
         this.isContextReady = true;
       }
     });

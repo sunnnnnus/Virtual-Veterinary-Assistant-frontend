@@ -55,15 +55,26 @@ header {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-/* 歡迎文字也靠右 */
-.header-welcom {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #333;
+/* logout 按鈕靠右 */
+.logout-button {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  min-width: 60px;
   white-space: nowrap;
   max-width: 120px;
   margin-left: auto;
-  text-align: right;
+  flex-shrink: 0;
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 /* menu-button 獨立控制 */
