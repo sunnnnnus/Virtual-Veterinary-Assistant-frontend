@@ -71,7 +71,6 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.error('註冊失敗', err);
-        // 🚨 檢查 HttpErrorResponse 中的錯誤訊息
         this.errorMessage = err.error?.message || '註冊過程中發生錯誤。';
       }
     });

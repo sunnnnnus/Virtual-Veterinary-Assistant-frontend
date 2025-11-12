@@ -43,7 +43,6 @@ export class AuthApiService {
   public currentUserId$ = this._currentUserId.asObservable();
 
   constructor(private http: HttpClient) {
-    // ✅ 不再自動 restore。由外部（例如 AppComponent）決定是否恢復 session
   }
 
   /** 手動恢復登入狀態（例如在 AppComponent 呼叫） */
@@ -51,7 +50,6 @@ export class AuthApiService {
     const savedId = this.readUserIdFromStorage();
     if (savedId) {
       this._currentUserId.next(savedId);
-      console.log(`🟢 Session restored: userId=${savedId}`);
     } else {
       console.log('🟡 沒有可恢復的登入狀態');
     }
@@ -63,7 +61,7 @@ export class AuthApiService {
     return raw ? parseInt(raw, 10) : null;
   }
 
-  /** ✅ 僅登入成功後才能正確取得 userId */
+  /** 僅登入成功後才能正確取得 userId */
   getCurrentUserId(): number | null {
     return this._currentUserId.value;
   }
@@ -95,14 +93,12 @@ export class AuthApiService {
   notifyLoginSuccess(userId: number): void {
     localStorage.setItem('current_user_id', userId.toString());
     this._currentUserId.next(userId);
-    console.log(`✅ AuthApiService: 手動通知登入成功 userId=${userId}`);
   }
 
   /** 登出並清除狀態 */
   logout(): void {
     localStorage.removeItem('current_user_id');
     this._currentUserId.next(null);
-    console.log('🚪 登出成功，狀態已清除');
   }
 
   get currentUserId(): Observable<number | null> {
