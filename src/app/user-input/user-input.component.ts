@@ -5,7 +5,9 @@ import {
   AfterViewChecked,
   OnInit,
   OnDestroy,
-  Input
+  Input,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { AiApiService, ChatMessage, AIChatRequest } from '../services/api/ai-api.service';
 import { PetApiService, PetDetail } from '../services/api/pet-api.service';
@@ -16,7 +18,6 @@ import { AuthApiService } from '../services/api/auth-api.service';
 import { HistoryApiService } from '../services/api/history-api.service';
 import { RoleStateService } from '../services/utils/role-state.service';
 import { TtsApiService } from '../services/api/tts-api.service';
-import { CareSuggestionCardComponent } from '../care-suggestion-card/care-suggestion-card.component';
 
 interface Role {
   name: string;
@@ -35,7 +36,7 @@ declare var webkitSpeechRecognition: any;
 export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   @ViewChild('chatWindow') private chatWindow!: ElementRef;
   @ViewChild('chatInput') private chatInput!: ElementRef<HTMLTextAreaElement>;
-
+  @Output() hasTyped = new EventEmitter<boolean>();
 
   userMessage = '';
   chatMessage: ChatMessage[] = [];
@@ -60,7 +61,6 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   currentPlayingMessageId: string | null = null;
   playingCardIndex: number | null = null;
 
-
   // 歷史紀錄管理
   history: Array<{
     id: number;
@@ -82,6 +82,7 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   private recognition: any;
 
   @Input() petIdFromParent: number | null = null;
+  @Input() openingPrompt: string = '';
 
   constructor(
     private aiApi: AiApiService,
@@ -94,8 +95,6 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('照護建議:', this.careSuggestions);
-
     // 初始狀態
     this.currentPet = null;
     this.isContextReady = false;
@@ -146,12 +145,8 @@ private loadPetDetail(petId: number): void {
         if (petDetail && petDetail.pId > 0) {
           this.currentPet = petDetail;
           this.petApi.setCurrentPetId(petDetail.pId);
-          console.log(
-            `✅ 寵物上下文載入成功: ${petDetail.pName} (ID: ${petDetail.pId})`
-          );
         } else {
           this.currentPet = null;
-          console.warn('⚠️ 寵物資料載入失敗或 ID 無效。');
         }
         this.isContextReady = true;
       },
@@ -205,7 +200,6 @@ private saveCurrentConversation() {
       }))
     }).subscribe({
       next: (res) => {
-        console.log('✅ 已儲存問診紀錄:', res.conversationId);
         this.historyApi.notifyHistoryUpdated();
         this.resetChat();
         this.activeView = 'history';
@@ -236,6 +230,7 @@ sendMessage() {
 
   const userMsgText = this.userMessage.trim();
   this.userMessage = '';
+  this.hasTyped.emit(true);
   this.isLoading = true;
 
   // 將使用者訊息加入歷史聊天

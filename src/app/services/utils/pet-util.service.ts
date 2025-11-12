@@ -20,7 +20,6 @@ export class PetUtilService {
     constructor() {
         // 服務初始化時，建立查找表，只執行一次
         this.lookupTable = this.createReverseLookup(this.speciesMap);
-        console.log('✅ PetUtilService 啟動：已載入品種查找表。');
     }
 
     /**

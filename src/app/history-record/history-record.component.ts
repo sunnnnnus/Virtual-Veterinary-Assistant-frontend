@@ -29,7 +29,6 @@ export class HistoryRecordComponent implements OnInit {
 
     // 監聽更新通知
     this.historyApi.onHistoryUpdated().subscribe(() => {
-      console.log('📥 收到更新通知，重新載入歷史紀錄');
       this.loadHistory();
     });
   }
@@ -38,7 +37,6 @@ export class HistoryRecordComponent implements OnInit {
     this.historyApi.getConversationHistory(this.currentPetId).subscribe({
       next: (data) => {
         this.history = data;
-        console.log('歷史紀錄已載入:', data);
       },
       error: (err) => {
         console.warn('載入歷史紀錄失敗:', err);
