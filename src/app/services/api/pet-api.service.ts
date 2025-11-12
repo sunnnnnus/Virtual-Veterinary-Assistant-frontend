@@ -15,6 +15,22 @@ interface PetSummary {
   sex: '公' | '母' | '未知';
 }
 
+// 定義寵物過往疾病for開場
+export interface OpeningContext {
+  petId: number;
+  petName: string;
+  species: string;
+  age: number;
+  weight: number;
+  sex: string;
+  lastDiagnosis: {
+    diseaseName: string;
+    severity: string;
+    advice: string;
+    createdAt: string;
+  } | null;
+}
+
 export interface PetDetail extends PetSummary {
   userId: number;
   weight: number | null; // 體重可能是 NULL
@@ -28,9 +44,6 @@ export class PetApiService {
 
   // 新增目前選取的寵物 ID
   private currentPetId$ = new BehaviorSubject<number | null>(null);
-
-
-
   constructor(private http: HttpClient) { }
 
   // 設定目前寵物
@@ -65,5 +78,9 @@ export class PetApiService {
    */
   getPetDetail(pId: number): Observable<PetDetail> {
     return this.http.get<PetDetail>(`${this.apiUrl}/${pId}`);
+  }
+
+  getOpeningContext(pId: number): Observable<OpeningContext> {
+    return this.http.get<OpeningContext>(`${this.apiUrl}/${pId}/opening-context`);
   }
 }

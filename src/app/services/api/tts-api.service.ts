@@ -29,8 +29,6 @@ export class TtsApiService {
           },
           error: err => reject(err)
         });
-
-      console.log('前端送出的語音:', voiceName);
     });
   }
 

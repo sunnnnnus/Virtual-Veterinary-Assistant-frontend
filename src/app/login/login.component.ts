@@ -26,13 +26,8 @@ export class LoginComponent {
     this.authApiService.login(loginData).subscribe({
       next: (response) => {
         const userId = response.userId;
-
-        // 🎯 修正：在跳轉前，明確通知 AuthApiService 狀態已改變 🎯
-        this.authApiService.notifyLoginSuccess(userId); // ❗ 新增這一行 ❗
-        console.log('✅ 登入成功，服務已更新快取:', userId);
-
+        this.authApiService.notifyLoginSuccess(userId);
         this.dialogRef.close();
-       
         this.userphone = '';
         this.password = '';
         this.router.navigate(['/']);

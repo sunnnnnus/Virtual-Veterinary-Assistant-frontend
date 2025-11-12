@@ -144,6 +144,24 @@ app-user-input .chat-window {
     font-size: 24px;
 }
 
+.opening-prompt-box {
+  background: rgb(84, 123, 202);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px auto;
+  max-width: 480px;
+  box-shadow: 0 2px 4px rgba(255, 173, 85, 0.1);
+  font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+  transition: box-shadow 0.3s ease;
+}
+
+.opening-text {
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   /* 主容器垂直排列 */
   .app-container {
@@ -185,5 +203,20 @@ app-user-input .chat-window {
   app-user-input .chat-window {
     padding: 10px 0;
     max-width: 100%;
+  }
+
+  .opening-prompt-box {
+    margin-top: 100px; /* 預留空間給右上角角色 */
+    padding: 14px;
+    font-size: 15px;
+    max-width: 90vw; /* 限制最大寬度為螢幕寬度的 90% */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box; /* 確保 padding 不會撐爆寬度 */
+  }
+
+  .opening-text {
+    font-size: 15px;
+    word-wrap: break-word;
   }
 }
