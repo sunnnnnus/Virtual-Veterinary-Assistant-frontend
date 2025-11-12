@@ -67,12 +67,10 @@ export class HomeComponent implements OnInit {
 
     if (lastDiagnosis) {
       prompt = `${petName} 上次診斷是 ${lastDiagnosis.diseaseName}（${lastDiagnosis.severity}），`;
-      prompt += lastDiagnosis.advice ? `我們${lastDiagnosis.advice}` : '';
+      prompt += lastDiagnosis.advice ? `我們${lastDiagnosis.advice}請問目前症狀有好轉嗎？` : '';
     } else {
-      prompt = `${petName} 是第一次來看診，`;
+      prompt = `${petName} 是第一次來看診，今天怎麼啦～`;
     }
-
-    prompt += `請問目前症狀有好轉嗎？`;
     return prompt;
   }
 
