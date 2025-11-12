@@ -5,7 +5,8 @@ import {
   AfterViewChecked,
   OnInit,
   OnDestroy,
-  Input
+  Input,
+  NgZone
 } from '@angular/core';
 import { AiApiService, ChatMessage, AIChatRequest } from '../services/api/ai-api.service';
 import { PetApiService, PetDetail } from '../services/api/pet-api.service';
@@ -16,7 +17,7 @@ import { AuthApiService } from '../services/api/auth-api.service';
 import { HistoryApiService } from '../services/api/history-api.service';
 import { RoleStateService } from '../services/utils/role-state.service';
 import { TtsApiService } from '../services/api/tts-api.service';
-import { NgZone } from '@angular/core';
+
 
 interface Role {
   name: string;
