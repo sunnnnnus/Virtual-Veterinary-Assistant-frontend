@@ -77,7 +77,7 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
   private authSubscription!: Subscription;
 
   private SpeechRecognition: any =
-    (window as any).SpeechRecognition || webkitSpeechRecognition;
+    (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
   supportsSpeechRecognition: boolean = !!this.SpeechRecognition;
   private recognition: any;
 
@@ -91,7 +91,8 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
     private authService: AuthApiService,
     private historyApi : HistoryApiService,
     private roleState: RoleStateService,
-    private ttsApi: TtsApiService
+    private ttsApi: TtsApiService,
+    private zone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -112,7 +113,7 @@ export class UserInputComponent implements AfterViewChecked, OnInit, OnDestroy {
       } else {
         // 沒有寵物的話，頁面可以解除鎖定，但仍無法聊天
         this.isContextReady = true;
-        console.warn(`✅ 用戶 ${userId} 登入成功，但無寵物被選中。`);
+        console.warn(`用戶 ${userId} 登入成功，但無寵物被選中。`);
       }
     });
 
@@ -245,7 +246,7 @@ sendMessage() {
   this.scrollToBottom();
   this.updateInputPosition();
 
-  // 準備 API request
+  // AI request
   const request: AIChatRequest = {
     userId: this.currentUserId!,
     petId: this.currentPet!.pId,
@@ -293,7 +294,7 @@ sendMessage() {
 
       // 結束問診流程
       if (response.currentStep === 'provide_advice' || response.isConversationEnd) {
-        this.careSuggestions = response.careSuggestions || []; // 假設後端有傳建議陣列
+        this.careSuggestions = response.careSuggestions || [];
 
         if (severity === '高') {
           this.openEmergencyModal();
@@ -324,7 +325,7 @@ sendMessage() {
 
 adjustTextareaHeight() {
   const textarea = this.chatInput.nativeElement;
-  textarea.style.height = 'auto'; // 先重置
+  textarea.style.height = 'auto';
   textarea.style.height = textarea.scrollHeight + 'px';
 }
 
@@ -394,27 +395,25 @@ ngOnDestroy(): void {
     this.recognition = new this.SpeechRecognition();
     this.recognition.lang = 'zh-TW';
     this.recognition.continuous = false;
-    this.recognition.interimResults = true;
+    this.recognition.interimResults = false;
+    this.recognition.maxAlternatives = 1;
 
     this.recognition.onresult = (event: any) => {
-      let interimTranscript = '';
       let finalTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) finalTranscript += transcript;
-        else interimTranscript += transcript;
       }
-      if (finalTranscript) {
+
+      this.zone.run(() => {
         this.userMessage = finalTranscript;
         this.isListening = false;
-      } else {
-        this.userMessage = interimTranscript;
-      }
+      });
     };
 
     this.recognition.onend = () => {
-      if (this.isListening) {
-        this.isListening = false;
+      this.isListening = false;
+      if (this.userMessage === '...') {
         this.userMessage = '';
       }
     };
