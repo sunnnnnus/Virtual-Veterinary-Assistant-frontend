@@ -102,6 +102,6 @@ export class AuthApiService {
   }
 
   get currentUserId(): Observable<number | null> {
-  return this._currentUserId.asObservable();
-}
+    return this._currentUserId.asObservable();
+  }
 }

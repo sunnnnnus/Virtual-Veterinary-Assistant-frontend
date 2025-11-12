@@ -52,9 +52,5 @@ export class HeaderComponent implements OnInit {
   checkMobile() {
     this.isMobile = window.innerWidth <= 768;
   }
-  logout(): void {
-    this.authApi.logout();
-    this.petName = '';
-  }
 }
 
