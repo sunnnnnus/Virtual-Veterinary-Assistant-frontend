@@ -17,18 +17,8 @@ import { of, Subscription } from 'rxjs';
 import { catchError, filter, switchMap } from 'rxjs/operators';
 import { AuthApiService } from '../services/api/auth-api.service';
 import { HistoryApiService } from '../services/api/history-api.service';
-import { RoleStateService } from '../services/utils/role-state.service';
+import { RoleStateService, Role } from '../services/utils/role-state.service';
 import { TtsApiService } from '../services/api/tts-api.service';
-
-
-interface Role {
-  name: string;
-  avatar: string;
-  stylePrompt: string;
-  voiceName: string;
-}
-
-declare var webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-user-input',

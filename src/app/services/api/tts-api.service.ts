@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AIRole } from 'src/app/ai-role/ai-role.component';
+import { Role } from '../utils/role-state.service'
 
 @Injectable({ providedIn: 'root' })
 export class TtsApiService {
@@ -10,7 +10,7 @@ export class TtsApiService {
 
   constructor(private http: HttpClient) {}
 
-  play(text: string, role: AIRole): Promise<void> {
+  play(text: string, role: Role): Promise<void> {
     const voiceName = role.voiceName || 'zh-TW-HsiaoChenNeural';
 
     return new Promise((resolve, reject) => {
