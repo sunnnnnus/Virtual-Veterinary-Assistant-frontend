@@ -77,8 +77,8 @@ export class HomeComponent implements OnInit {
     let prompt = '';
 
     if (lastDiagnosis) {
-      prompt = `${petName} 上次診斷是 ${lastDiagnosis.diseaseName}（${lastDiagnosis.severity}），`;
-      prompt += lastDiagnosis.advice ? `我們${lastDiagnosis.advice}請問目前症狀有好轉嗎？` : '';
+      prompt = `${petName}上次診斷是${lastDiagnosis.diseaseName}，`;
+      prompt += lastDiagnosis.advice ? `上次我們${lastDiagnosis.advice}目前${petName}症狀有好轉嗎？` : '';
     } else {
       prompt = `${petName} 是第一次來看診，今天怎麼啦～`;
     }
